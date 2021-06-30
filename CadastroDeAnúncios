@@ -1,0 +1,119 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{   
+    string nomeAnuncio, nomeCliente;
+    int diaIni, mesIni, diaTerm, mesTerm, diasAnuncio;
+    double investimentoDia, totalInvest;
+    
+    cout << "Informe o nome do anúncio: ";
+    cin >> nomeAnuncio;
+    
+    cout << "Informe o nome do cliente: ";
+    cin >> nomeCliente;
+    
+    cout << "Informe o dia de início do anúncio (formato dd): ";
+    cin >> diaIni;
+    
+    cout << "Informe o mês de início do anúncio (formato mm): ";
+    cin >> mesIni;
+    
+    cout << "Informe o dia de término do anúncio (formato dd): ";
+    cin >> diaTerm;
+    
+    cout << "Informe o mês de término do anúncio (formato mm): ";
+    cin >> mesTerm;
+    
+    cout << "Informe o investimento por dia: ";
+    cin >> investimentoDia;
+    
+    
+    //Contagem de dias do anúncio:
+    if(mesIni != mesTerm)
+    {
+        if((mesIni == 1) || (mesIni == 3) || (mesIni == 5) || (mesIni == 7) || (mesIni == 8) || (mesIni == 10) || (mesIni == 12))
+            mesIni = 31 - diaIni;
+    
+        else if(mesIni == 2)
+            mesIni = 28 - diaIni;
+    
+        else if((mesIni == 4) || (mesIni == 6) || (mesIni == 9) || (mesIni == 11))
+            mesIni = 30 - diaIni;
+        
+        diasAnuncio = diaIni + diaTerm;
+    }
+    
+    else
+        diasAnuncio = diaTerm - diaIni;
+    
+    
+    //Relatório do valor total investido:
+    totalInvest = diasAnuncio * investimentoDia;
+    cout << endl << "Cliente " << nomeCliente << " do anúncio " << nomeAnuncio;
+    cout << ", o valor total investido foi de: " << totalInvest << " reais." << endl;
+    
+    
+/********************************************************************************************/
+
+    float pessoas1, clicam, compart, visuali;
+    float tot2[3], cliques[4], compartTot[4];
+    
+    // A cada RS1,00 investido 30 pessoas visualizam o anúncio original:
+    float x = ((totalInvest / totalInvest) * 30);
+    pessoas1 = x * totalInvest;
+    //Teste unitário 1: cout << "A quantidade de pessoas atingidas foi: " << pessoas1 << endl;
+    
+    // A cada 100 pessoas que visualizam o anúncio 12 clicam nele:
+    clicam = ((pessoas1 / 100) * 12);
+    cliques[3] = clicam;
+    //Teste unitário 2: cout << "Clicaram no anúncio: " << clicam << endl;
+    
+    // A cada 20 pessoas que clicam no anúncio, 3 compartilham nas redes sociais:
+    compart = ((clicam / 20) * 3);
+    compartTot[3] = compart;
+    //Teste unitário 3: cout << "Compartilham nas redes sociais: " << compart << endl;
+    
+    // Cada compartilhamento nas redes sociais gera 40 novas visualizações:
+    visuali = (compart * 40);
+    //Teste unitário 4: cout << "Cada compartilhamento gera 40 novas visualizações: " << visuali << endl;
+    
+    // Total de visualização do anúncio original:
+    float tot1 = pessoas1 + visuali;
+    //cout << "Total de pessoas que visualizaram o anúncio original: " << tot1 << endl;
+    
+    
+    /*O mesmo anúncio é compartilhado no máximo 4x em sequência.
+    Tendo o resultado de views da primeira onda de compartilhamentos, vamos as outras 3:*/
+    
+    for(int pos = 0; pos < 3; pos++)
+    {
+        //cout << endl << pos+2 << "º compartilhamento: " << endl;
+        clicam = ((visuali / 100) * 12);
+        //cout << "Clicam: " << clicam << endl;
+        compart = ((clicam / 20) * 3);
+        //cout << "Compartilham: " << compart << endl;
+        visuali = (compart * 40);
+        //cout << "Visualizam: " << visuali << endl;
+        
+        compartTot[pos] = compart;
+        cliques[pos] = clicam;
+        tot2[pos] = visuali;
+    }
+    
+    //Projeção aproximada da quantidade máxima de visualizações do mesmo anúncio: anúncio original + os compartilhamentos:
+    double resFinal = tot1 + tot2[0] + tot2[1] + tot2[2];
+    cout << endl << "Projeção aproximada da quantidade máxima de visualizações: " << resFinal << endl;
+    
+    //Quantidade máxima de cliques:
+    double cliquesMax = cliques[0] + cliques[1] + cliques[2] + cliques[3];
+    cout << endl << "Quantidade máxima de cliques: " << cliquesMax << endl;
+
+    //Quantidade máxima de compartilhamentos:
+    double compartMax = compartTot[0] + compartTot[1] + compartTot[2] + compartTot[3];
+    cout << endl << "Quantidade máxima de compartilhamentos: " << compartMax << endl;
+    
+    
+    return 0;
+} 
