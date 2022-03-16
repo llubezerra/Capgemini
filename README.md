@@ -1,4 +1,6 @@
 # Capgemini
+
+Código do meu projeto entregue para o desafio de programação.
 <!--O código deve incluir o arquivo README na raiz com a documentação do sistema, incluindo a descrição de como compilar e executar o programa, além das instruções de utilização:
 
 Os códigos foram criados no compilador online: https://www.onlinegdb.com/online_c++_compiler
